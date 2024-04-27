@@ -69,27 +69,7 @@ def fetch_top_questions(api_key, count=5, answers_count=5):
     return None
 
 
-def write_to_files(
-    question_data,
-    questions_filename="./data/text/questions.txt",
-    answers_filename="./data/text/answers.txt",
-):
-    with open(questions_filename, "w", encoding="utf-8") as questions_file, open(
-        answers_filename, "w", encoding="utf-8"
-    ) as answers_file:
-        for _, (title, _, answers) in enumerate(question_data, start=1):
-            question_plain = BeautifulSoup(title, "html.parser").get_text()
-            questions_file.write(f"{question_plain}\n")
 
-            for ans_index, answer in enumerate(answers, start=1):
-                answer_plain = BeautifulSoup(answer, "html.parser").get_text()
-                answers_file.write(
-                    f"Answer#{ans_index} For: '{question_plain}' \n*******************\n {answer_plain}\n"
-                )
-
-
-if __name__ == "__main__":
-    api_key = "46anTbsQWaRxMsHC*AdtqQ(("
 
     top_questions = fetch_top_questions(api_key, count=5)
 
